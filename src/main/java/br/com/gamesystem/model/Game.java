@@ -12,6 +12,8 @@ public class Game {
         this.price = price;
     }
 
+    public Game(){}
+
     public int getId() {
         return id;
     }
