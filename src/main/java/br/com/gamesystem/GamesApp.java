@@ -1,5 +1,6 @@
 package br.com.gamesystem;
 
+import br.com.gamesystem.dao.GameDao;
 import br.com.gamesystem.factory.ConnectionFactory;
 import br.com.gamesystem.model.Game;
 
@@ -11,8 +12,7 @@ public class GamesApp {
 
         System.out.println("Testing connection...");
         try {
-            Connection connection = ConnectionFactory.getConnection();
-            System.out.println("Success!");
+            GameDao gameDao = new GameDao();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
