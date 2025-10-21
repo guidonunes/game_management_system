@@ -45,4 +45,14 @@ public class Game {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "Game{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", isFinished=" + isFinished +
+                ", price=" + price +
+                '}';
+    }
 }

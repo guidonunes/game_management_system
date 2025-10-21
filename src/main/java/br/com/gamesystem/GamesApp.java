@@ -8,13 +8,15 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class GamesApp {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
         System.out.println("Testing connection...");
-        try {
-            GameDao gameDao = new GameDao();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        GameDao gameDao = new GameDao();
+        Game game = gameDao.searchById(1);
+        System.out.println(game);
+//        Game bg = new Game("God of War 2", true, 399.90 );
+//        bg.setId(3);
+//        gameDao.updateGame(bg);
+
     }
 }
