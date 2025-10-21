@@ -4,6 +4,7 @@ import br.com.gamesystem.factory.ConnectionFactory;
 import br.com.gamesystem.model.Game;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameDao {
@@ -42,7 +43,17 @@ public class GameDao {
         }
     }
 
-    public void deleteGame(int id) {}
+    public void deleteGame(int id) {
+        String sql = "DELETE FROM TB_GAMES WHERE ID = ?";
+        try {
+            PreparedStatement pstm = connection.prepareStatement(sql);
+            pstm.setInt(1, id);
+            pstm.executeUpdate();
+            System.out.println("Game deleted: " + id);
+        } catch (SQLException e) {
+            throw new RuntimeException("An error ocurred: " + e);
+        }
+    }
 
     public Game searchById(int id) {
         try {
@@ -66,7 +77,26 @@ public class GameDao {
     }
 
     public List<Game> getAll() {
-        return null;
+        List<Game> games = new ArrayList<>();
+        String sql = "SELECT * FROM TB_GAMES";
+
+        try  (PreparedStatement pstm = connection.prepareStatement(sql);
+                ResultSet resultSet = pstm.executeQuery()) {
+            while (resultSet.next()) {
+                Game game = new  Game();
+                game.setId(resultSet.getInt("ID"));
+                game.setTitle(resultSet.getString("TITLE"));
+                game.setFinished(resultSet.getBoolean("IS_FINISHED"));
+                game.setPrice(resultSet.getDouble("PRICE"));
+
+                games.add(game);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("An error ocurred: " + e);
+        }
+
+        return games;
     }
 
 }
