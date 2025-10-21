@@ -48,11 +48,10 @@ public class Game {
 
     @Override
     public String toString() {
-        return "Game{" +
+        return "Game: " +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", isFinished=" + isFinished +
-                ", price=" + price +
-                '}';
+                ", price=" + price;
     }
 }
